@@ -1,0 +1,48 @@
+.app{
+    width: auto;
+    height: auto;
+}
+
+.task{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: 60%;
+    height: 10vh;
+    /* padding: 1.5em; */
+    border-bottom: 0.2em solid rgba(128, 128, 128, 0.2);
+}
+
+.task div{
+    /* border: 1px #ccc solid; */
+}
+
+.task input{
+    margin-right: 1vw;
+}
+
+#taskName{
+    margin-top: 10px;
+    font: black;
+    
+    
+}
+
+#cbox{
+    zoom: 1.5;
+}
+
+.importance{
+
+}
+
+#time{
+    display: inline;
+    /* border: 1px #ccc solid; */
+    flex: 1;
+    align-self: flex-end;
+    text-align: center;
+}
+
