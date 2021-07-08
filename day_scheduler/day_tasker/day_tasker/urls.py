@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.autodiscover()
+
+#Allow both apps frontend and leads to handle url requests
 urlpatterns = [
-    path('', include('frontend.urls')),
-    path('', include('leads.urls'))
+    path('admin/', admin.site.urls),
+     path('api', include('leads.urls')),
+    path('', include('frontend.urls'))
 ]

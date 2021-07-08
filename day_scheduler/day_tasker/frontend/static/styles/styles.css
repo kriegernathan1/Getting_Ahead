@@ -1,8 +1,28 @@
-.app{
-    width: auto;
-    height: auto;
+html .greyout{
+    height: 100vh;
 }
 
+html{
+    width: 100%;
+}
+
+.navbar{
+    width: 100vw;
+}
+
+
+.app{
+   
+}
+
+.today{
+    text-align: center;
+    margin-top: 4vh;
+    border-bottom: 0.2em solid rgba(128, 128, 128, 0.5);
+
+}
+
+/* Task stlye */
 .task{
     display: flex;
     flex-direction: row;
@@ -10,39 +30,600 @@
     align-items: center;
     margin: auto;
     width: 60%;
-    height: 10vh;
+    min-width: 375px;
     /* padding: 1.5em; */
     border-bottom: 0.2em solid rgba(128, 128, 128, 0.2);
+    background-color: white;
+    padding-bottom: 0.5em;
 }
 
-.task div{
-    /* border: 1px #ccc solid; */
+
+
+.task:hover{
+    border-bottom: 0.2em solid rgba(128, 128, 128, 0.4);
 }
+
+.task > div{
+    margin-right: auto;
+}
+
 
 .task input{
     margin-right: 1vw;
 }
 
 #taskName{
-    margin-top: 10px;
-    font: black;
-    
-    
+    margin-top: 10px; 
+    max-width: 33%;
+    width: 33%;
 }
+
+#taskName label{
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+
 
 #cbox{
     zoom: 1.5;
+    align-self: center;
 }
 
-.importance{
+.deleteTask-btn{
+    border: none;
+    background-color: transparent;
 
 }
+
+#deleteTask{
+    width: 1.3em;
+    margin-right: 28px;
+    margin-top: 10px;
+}
+
 
 #time{
     display: inline;
     /* border: 1px #ccc solid; */
-    flex: 1;
     align-self: flex-end;
+    justify-self: flex-start;
     text-align: center;
+    max-width: 33%;
+    width: 33%;
+}
+
+#time > div > label {
+    min-width: 15px;
+    min-height: 10px;
+    margin-right: 0.4em
+}
+
+#time > div{
+    /* padding-right: 100%; */
+}
+
+.nameSubmit{
+    visibility: hidden;
+}
+
+.nameForm{
+    border: none;
+}
+
+.nameForm:focus{
+    outline-color: black;
+    outline-style: solid;
+    outline-width: 1px;
+}
+
+.nameForm:hover{
+    border: 1px solid black;
+}
+
+
+
+/* End Task styling */
+
+/* Style The Dropdown Button */
+.SortDropdown > button {
+    color: white;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2em;
+    color: grey;
+    cursor: pointer;
+ 
+  }
+
+.SortDropdown > button:hover {
+    text-decoration: underline;
+}
+  
+  /* The container <div> - needed to position the dropdown content */
+  button#dropdown-basic {
+    padding: 0;
+}
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    text-decoration: underline;
+  }
+
+  /* Add task button  */
+  .addTaskBtn{
+      display: inline-block;
+      position: relative;
+      background-color: transparent;
+      border: 1px solid black;
+      font-size: 1.2em;
+      box-shadow: rgba(0, 0, 0, 0.15) 3px 3px 2.6px;
+      padding: 5px 15px;
+      border-radius: 1em;
+  }
+
+  .addTaskBtn:hover{
+    border: 2px solid black;
+  }
+
+/* End add task button */
+
+/* Move to today button */
+.mvtoday{
+    display: inline-block;
+    align-self: center;
+    background-color: transparent;
+    border: 1px solid black;
+    font-size: 1.2em;
+    box-shadow: rgba(0, 0, 0, 0.15) 3px 3px 2.6px;
+    padding: 5px 15px;
+    border-radius: 1em;
+}
+
+.mvtoday:hover{
+    border: 2px solid black;
+}
+
+
+/* End of move to today button  */
+
+/* Flexbox for Top botton */
+.topBtns
+{
+    display: flex;
+    width: 63%;
+    margin-top: 4vh;
+    margin-bottom: -1vh;
+    margin-left: 19vw;
+    justify-content: space-between ;
+    align-items: center;
+    padding: 1em;
+}
+
+/* Emd flex box */
+
+/* Loading style */
+.loadingMyTasks{
+    
+}
+
+/* Loading style */
+
+.importance{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    margin-right: 0 !important;
+    width: 33%;
+}
+
+.importance > div{
+    margin-left: auto;
+}
+
+.importance-inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.checkbox-n-button{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.Today{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Today-Container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1980px;
+
+
+}
+
+
+.productivity-container{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2%;
+    padding: 1em;
+}
+
+.productivity-container button{
+    background-color: transparent;
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.15) 3px 3px 2.6px;
+    padding: 5px 15px;
+    border-radius: 1em;
+}
+
+.productivity-container button:hover{
+    border: 2px solid black;
+}
+
+
+
+#start-day{
+    justify-self: center;
+    /* color: green; */
+}
+
+
+.totals{
+    
+    align-self: flex-end;
+    margin-right: 25%;
+    
+}
+
+.totals > p {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+/* color of importance */
+
+.importantandUrgent *{
+    color: red;
+}
+
+.importantAndNotUrgent *{
+    color: orange;
+}
+
+.urgentButNotImportant *{
+    color: blue;
+}
+
+.notImportantNotUrgent *{
+    color: grey;
+
+}
+
+.default *{
+    color: black;
+}
+
+/* end importance */
+
+.productive-modal{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+    min-height: 90vh;
+    background-color: white !important;
+    border: 3px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+    z-index: 300;
+}
+
+.productive-modal-container{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.productive-modal h2{
+    text-align: center;
+    /* text-decoration: underline; */
+    font-size: 1em;
+}
+
+/* greyout background for modal  */
+.dropdown-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 200;
+  }
+
+
+.timer-btns{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.timer-btns > *{
+    padding: 1em;
+}
+
+.start-timer{
+    background-color: green;
+    color: white;
+    
+}
+
+
+
+.stop-timer{
+    background-color: red;
+    color: white;
+}
+
+.productive-modal button{
+    border: 0.5px solid black;
+    width: 120px;
+    box-shadow: rgba(0, 0, 0, 0.15) 3px 3px 2.6px;
+    padding: 5px 15px;
+    border-radius: 1em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+}
+
+.productive-modal button:hover{
+    border: 1px solid black;
+}
+
+.break{
+    white-space: nowrap;
+    background-color: blue;
+    color: white;
+}
+
+.long-break{
+    color: white;
+    background-color: orange;
+}
+
+.timer-btn{
+    font-size: 1.2em;
+    padding: 0 15px;
+    border: none;
+}
+
+.countdown{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.time{
+    display: flex;
+    justify-content: center;
+}
+
+#time > div{
+    display: inline;
+}
+
+br{
+    width: 100%;
+    
+}
+
+.completedTask  *{
+    text-decoration: line-through !important;
+    color: grey;
+}
+
+#close-modal{
+    background-color: transparent !important;
+    width: 5%;
+    border: none !important;
+    box-shadow: none !important;
+
+}
+
+.seperator{
+    height: 1px;
+    width: 100%;
+    background-color: black;
+    margin-top: 2%;
+}
+
+
+
+.task-holder span{
+    font-size: 1.3em;
+    color: grey;
+}
+
+.task-holder div{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* margin-top: 2%; */
+}
+
+.task-holder p{
+    text-align: center;
+    color: black;
+}
+
+.task-holder > p > span{
+    font-weight: bold;
+    font-size: 1em;
+    color: black
+}
+
+.task-holder{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    padding: 1em;
+}
+
+.task-holder input{
+    zoom: 1.2;
+    margin-bottom: 15px;
+
+}
+
+#task-name{
+    font-weight: bold;
+    font-size: 1.2em;
+    color: black
+}
+
+
+.remaining-tasks > .task{
+    width: 100%;
+}
+
+.remaining-tasks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.remaining-tasks > h2{
+    text-align: center;
+    /* text-decoration: underline; */
+    font-weight: lighter;
+    font-size: 1em;
+}
+
+.remaining-tasks > .task button{
+    border: none !important;
+}
+
+.remaining-tasks  p{
+    font-weight: lighter !important;
+}
+
+.remaining-tasks span{
+    font-weight: normal !important;
+}
+
+.taskHighlight{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    border-bottom: 0.2em solid rgba(128, 128, 128, 0.2);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
+#modal-focus{
+    margin-top: 2%;
+}
+
+.no-display{
+    display: none;
+}
+
+.completed-tasks-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.completed-tasks-list  *{
+    text-decoration: line-through !important;
+    font-weight: lighter !important;
+
+}
+
+.completed-tasks-container h2{
+    margin-top: 15px;
+
+}
+
+#important-and-urgent-select{
+    color: red !important;
+}
+
+#important-not-urgent-select{
+    color: orange !important;
+}
+
+#urgent-not-important-select{
+    color: blue !important;
+}
+
+#not-important-select{
+    color: grey !important;
 }
 
