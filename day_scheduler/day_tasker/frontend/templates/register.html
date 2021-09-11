@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/register.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New User</title>
+</head>
+<body>
+    <div class="register-container">
+        <!-- <p class="disclaimer">
+            <span>Disclaimer:</span> While best security practices were used creating this website, 
+            we recommend not using any username or passwords that are linked to any other account 
+            you might possess.
+        </p> -->
+        <div class="login">
+            <div class="form-container">
+
+                <div class="login-card">
+                    <h2>Register New User</h2>
+                    <form action="/register/" method="post" autocomplete="off">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

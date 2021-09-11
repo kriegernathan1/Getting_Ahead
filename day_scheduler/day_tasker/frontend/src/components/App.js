@@ -54,18 +54,15 @@ class App extends Component {
                <div className="App">
                 <Nav link1={this.state.link1}/>
                 <Switch>
-                    <Route exact path="/" 
+                    <Route path="/Today" 
                         render={ () => 
                         (
-                            // <Today masterTasks={this.all_tasks} activeNav={this.activeNav}  addTaskMaster={this.addTaskMaster} deleteTaskMaster={this.deleteTaskMaster}/>
                             <Today activeNav={this.activeNav}  />
                         )} 
                     />
-                    <Route exact path="/MyTasks" 
+                    <Route path="/MyTasks" 
                         render={ () => 
                         (
-                            // <MyTasks setShowInTasks={this.setShowInTasks} masterTasks={this.all_tasks} activeNav={this.activeNav} addTaskMaster={this.addTaskMaster} deleteTaskMaster={this.deleteTaskMaster}/>
-
                             <MyTasks activeNav={this.activeNav} />
                         )}
                     />

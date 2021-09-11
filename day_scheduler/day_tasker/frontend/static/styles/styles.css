@@ -22,6 +22,11 @@ html{
 
 }
 
+input{
+    outline: none !important;
+}
+
+
 /* Task stlye */
 .task{
     display: flex;
@@ -153,6 +158,18 @@ html{
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+  }
+
+  .dropdown-content button{
+      border: none;
+      width: 100%;
+      background-color: transparent;
+  }
+
+  
+
+  .SortDropdown:hover .dropdown-content{
+      display: block;
   }
   
   /* Links inside the dropdown */
@@ -575,7 +592,7 @@ br{
 .taskHighlight{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 100%;
     border-bottom: 0.2em solid rgba(128, 128, 128, 0.2);
@@ -583,6 +600,10 @@ br{
     padding-right: 15px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.taskHighlight p{
+    margin-right: 3em;
 }
 
 
@@ -627,3 +648,147 @@ br{
     color: grey !important;
 }
 
+/* Finish day modal */
+.finish-day-modal{
+    z-index: 300;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 40vw;
+    max-width: 600px;
+    background-color: white;
+    padding: 2em;
+    border-radius: 1em;
+}
+
+.finish-day-modal p{
+    color: black;
+    font-size: 1.1em;
+}
+
+.finish-day-modal h3{
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.btn-holder-finishday{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 1em;
+}
+
+.btn-holder-finishday button{
+    padding: 0.5em;
+    font-weight: 800;
+    border: none;
+    color: white;
+    width: 30%;
+    min-width: 150px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+}
+
+#finishDay_yes, #removeTask_yes{
+    background-color: #db4c3f
+}
+
+#finishDay_cancel, #removeTask_no{
+    background-color: #f3f3f3;
+    color: black;
+}
+
+.btn-holder-finishday:hover{
+    
+}
+
+
+/* Remove task modal */
+.remove-task-modal{
+    z-index: 300;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, 50%);
+    width: 40vw;
+    max-width: 600px;
+    background-color: white;
+    padding: 1em;
+    padding-bottom: 2em;
+    border-radius: 1em;
+}
+
+.remove-task-modal h3{
+    margin-top: 0.3em;
+    font-size: 1.1em;
+    text-align: center;
+    color: black !important;
+}
+
+.task-modal-btnholder{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1em;
+    border-top: 1px solid #ddd;
+    padding-top: 1em;
+
+}
+
+.task-modal-btnholder button{
+    padding: 0.5em;
+    font-weight: 800;
+    border: none;
+    color: white;
+    width: 30%;
+    min-width: 150px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+}
+
+
+
+.no-tasks{
+    text-align: center;
+    color: black;
+    font-size: 1.4em;
+    margin-top: 1em;
+    margin-bottom: -2em;
+    position: absolute;
+    top: 30%;
+}
+
+@media (min-width: 992px){
+    .navbar-collapse{
+        position: relative;
+    }
+    
+    .dropdown-custom {
+        position: absolute;
+        right: 0;
+    }
+    
+
+}
+
+
+.logo{
+    position: absolute;
+    width: 350px;
+    height: auto;
+    filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(245deg) brightness(111%) contrast(101%);
+    top: -50px;
+
+}
+
+.navbar-nav{
+    margin-left: 205px;
+}
+
+.navbar
+
+nav a{
+    font-size: 1.1em;
+}

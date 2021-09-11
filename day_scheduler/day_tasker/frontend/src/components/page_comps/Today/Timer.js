@@ -51,12 +51,23 @@ export class Timer extends Component{
         if(!firstRender)
             this.setState({seconds: secs})
 
+        // Add 0 to beginning or end depending on number of seconds
         if(obj['h'] == 0  )    
             obj['h'] = obj['h'].toString().padEnd(2, "0")
+        if(obj['h'] < 9 && obj['h'] > 0)    
+            obj['h'] = obj['h'].toString().padStart(2, "0")
+
         if(obj['m'] == 0)    
             obj['m'] = obj['m'].toString().padEnd(2, "0")
+
+        if(obj['m'] <= 9 && obj['m'] > 0)
+            obj['m'] = obj['m'].toString().padStart(2, "0")
+
         if(obj['s'] == 0)    
             obj['s'] = obj['s'].toString().padEnd(2, "0") 
+
+        if(obj['s'] < 9 && obj['s'] > 0)
+            obj['s'] = obj['s'].toString().padStart(2, "0")
 
         if(pomodoro)
         {
@@ -88,7 +99,8 @@ export class Timer extends Component{
                                 })
                 }
                 else if (this.state.pomodoroTimeSeconds <= 0){
-                    //end timer and update time remaining at API
+                    this.props.decrementTime();
+                    this.started = false;
                     clearInterval(this.intervalId)
                 }
             }, 1000);
@@ -144,12 +156,14 @@ export class Timer extends Component{
 
                     <button className="timer-btn break" onClick={() => 
                         {
+                            this.pauseCountDown = false;
                             clearInterval(this.intervalId); 
                             this.pomodoro('break', true)
                             
                         }}>Short Break</button>
                     <button className="timer-btn long-break" onClick={() => 
                         {
+                            this.pauseCountDown = false;
                             clearInterval(this.intervalId); 
                             this.pomodoro('long break', true)
                         }}>Long Break</button>
@@ -172,14 +186,6 @@ export class Timer extends Component{
 
                 
             </div>
-            //Time 
-
-            //Start 
-
-            //stop
-
-
-
         )
     }
 

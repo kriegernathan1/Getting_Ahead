@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <title>Home page</title>
+</head>
+<body>
+    <div class="home-container">
+        <img src="{% static 'assets/app_logo.svg' %}" class="logo" />
+        <img src="{% static 'assets/productivity.jpg' %}"/>
+        
+        <div class="btn-holder">
+            <a href='/accounts/login/'>
+                <button>Login</button>
+            </a>
+    
+            <a href="/register/">
+                <button>Register</button>
+            </a>
+        </div>
+        
+    </div>
+
+</body>
+</html>

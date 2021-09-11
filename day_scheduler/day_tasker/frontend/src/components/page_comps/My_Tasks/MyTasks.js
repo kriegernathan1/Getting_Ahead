@@ -7,12 +7,14 @@ import TasksContain from "../../Layout/TasksContain"
 import SortBtn from './SortBtn'
 import { thatReturnsArgument } from 'react-inline-editing'
 import 'regenerator-runtime/runtime'
+import sendHttpAsync from '../../../cookie.js';
 
 //red: https://www.npmjs.com/package/react-js-loading-progress-bar
 import LoadingProgress from 'react-js-loading-progress-bar';//imported for loading animation
 
 
-const TASK_API = 'http://127.0.0.1:8000/api/tasks/?format=json'
+// const TASK_API = 'http://127.0.0.1:8000/api/tasks/?format=json'
+const TASK_API = '/api/tasks/?format=json'
 
 export class My_tasks extends Component {
     constructor(props){
@@ -22,7 +24,9 @@ export class My_tasks extends Component {
 
         this.state = {//array of all tasks on page
             tasks: [],
-            loading: true
+            loading: true,
+            showSorted: false,
+            sortTasks: []
         };
         
 
@@ -39,6 +43,7 @@ export class My_tasks extends Component {
         // this.createTasksArray = this.createTasksArray.bind(this);
         this.updateCheckedArr = this.updateCheckedArr.bind(this);
         this.getTasks = this.getTasks.bind(this);
+        this.sortTasks = this.sortTasks.bind(this);
 
     }//End constructor
 
@@ -95,15 +100,15 @@ export class My_tasks extends Component {
             "completed": false
         }
 
-        const request_json =  {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(task_json) // body data type must match "Content-Type" header
-        }
+        // const request_json =  {
+        //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(task_json) // body data type must match "Content-Type" header
+        // }
 
-        fetch(post_api, request_json)// Send post requests to REST API to create a new entry into DB
+        sendHttpAsync(post_api, 'POST' ,task_json)// Send post requests to REST API to create a new entry into DB
             .then(response => this.getTasks())
             .catch(error => console.error("Error occured POST for new Task", error))
     }
@@ -121,16 +126,20 @@ export class My_tasks extends Component {
 
 
         const delete_api = `/api/tasks/${id}/`
-        const request_json =  {
-            method: 'DELETE' // *GET, POST, PUT, DELETE, etc.
-        }
+        // const request_json =  {
+        //     method: 'DELETE' // *GET, POST, PUT, DELETE, etc.
+        // }
 
-        fetch(delete_api, request_json)
-            .then(response => console.log("Response from deleting task", response))
-            .catch(error => console.error("Error occurred deleting task", error))
-        
-
-
+        sendHttpAsync(delete_api, 'DELETE')
+            .then(response => 
+                {
+                    if(response.ok)
+                        console.log('Successful deletion of task');
+                    else
+                        console.log("Server responded with a non 200 code upon deletion of task ", response.status)
+                });
+            
+            
         this.setState({})//rerender 
     }
 
@@ -139,8 +148,12 @@ export class My_tasks extends Component {
                  changing showInToday boolean in DB.
     */
     async moveToToday(){
-        if(this.checkedTasks.length == 0)
+        
+        if(Object.keys(this.checkedTasks).length == 0)
+        {
+            alert("Select the task(s) you would like to move to today")
             return;
+        }
 
         const update_json = {
             "showInToday": true
@@ -150,16 +163,16 @@ export class My_tasks extends Component {
             var id = this.checkedTasks[task]
             const PATCH_API = `/api/tasks/${id}/`
 
-            const request_json =  {
-                method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(update_json) // body data type must match "Content-Type" header
-            }
+            // const request_json =  {
+            //     method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
+            //     headers: {
+            //       'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(update_json) // body data type must match "Content-Type" header
+            // }
     
-            await fetch(PATCH_API, request_json)// Send post requests to REST API to create a new entry into DB
-                .then(response => console.log(response))
+            await sendHttpAsync(PATCH_API, 'PATCH' , update_json)// Send post requests to REST API to create a new entry into DB
+                .then(response => console.log("Move to today ajax finished"))
                 .catch(error => console.error("Error moving task to Today", error))
     
         }
@@ -188,10 +201,36 @@ export class My_tasks extends Component {
         
     }
 
+    /**
+     * 
+     * @param {string} category - sort depends on option given. Either "Personal", "Family", or "Hobby". Otherwise no sort
+     */
+    sortTasks(category){
+        var sortedTasks = []
+
+        if(category == ' '){
+            this.setState({showSorted: false})
+            return;
+        }
+
+       for(const task in this.state.tasks){
+            const lifeArea = this.state.tasks[task].props.lifeArea
+
+           if(this.state.tasks[task].props.lifeArea == category){
+               sortedTasks.push(this.state.tasks[task])
+           }
+       }
+
+       this.setState(
+           {
+            sortedTasks: sortedTasks,
+            showSorted: true
+        })
+    }
+
    
 
     render(){
-        console.log("Rerender")
         return(
         <div>
             <div className="topBtns">
@@ -202,15 +241,24 @@ export class My_tasks extends Component {
                     <button className="mvtoday" onClick={this.moveToToday} >Move to today</button>
                     
                 </div>
-            <SortBtn/>
+            <SortBtn sortTasks={this.sortTasks}/>
                 
             </div>
 
-    {/* {this.state.loading ? <LoadingProgress visualOnly /> : <div> {this.state.tasks} </div>} */}
-
+            {!this.state.showSorted &&
             <div>
                 {this.state.tasks}
             </div>
+        
+            }
+
+            {this.state.showSorted &&
+                <div>
+                    {this.state.sortedTasks}
+                </div>
+                
+            
+            }
                 
             
         </div>

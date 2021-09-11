@@ -15,12 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 
 #Allow both apps frontend and leads to handle url requests
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('api', include('leads.urls')),
-    path('', include('frontend.urls'))
+     path('api', include('Tasks.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('frontend.urls')),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

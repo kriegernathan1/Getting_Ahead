@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User, AnonymousUser
+from django.conf import settings 
 
-class Lead(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=254, unique=True)
-    message = models.CharField(max_length=500, blank=True)
-    created_at = models.DateField(auto_now=True) 
+# class Lead(models.Model):
+#     name = models.CharField(max_length=100)
+#     email = models.EmailField(max_length=254, unique=True)
+#     message = models.CharField(max_length=500, blank=True)
+#     created_at = models.DateField(auto_now=True) 
 
 class Task(models.Model):
     # name of task 
@@ -30,6 +32,7 @@ class Task(models.Model):
     )
 
     name = models.CharField(max_length=50)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user", on_delete=models.CASCADE, default=1)
     time = models.CharField(max_length=8, default="")
     importance = models.CharField(max_length=50, choices = IMPORTANCE_CHOICES)
     lifeArea = models.CharField(max_length=20, choices=LIFE_AREA_CHOICES)

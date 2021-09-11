@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Lead, Task
+from .models import  Task
+# from .models import Lead, Task
 
 # Register your models here.
 

@@ -8,14 +8,24 @@ import EditableLabel from 'react-inline-editing';
 import Dropdown from "react-bootstrap/Dropdown"
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import sendHttpAsync from '../../cookie.js';
 
 export class Task extends Component {
     constructor(props){
         super(props);
 
+        var checked
+        if(this.props.inToday)
+        {
+            checked = this.props.checked
+        }
+        else{
+            checked = false
+        }
+
         this.state = {
             importance: this.props.importance,
-            checked: false,
+            checked: checked,
             lifeArea: this.props.lifeArea,
             time: this.props.time,
             time_comp:  <div id="time">
@@ -28,7 +38,8 @@ export class Task extends Component {
                         </div> ,
             style: {},
             mainClass: 'default',
-            completedClass: ''
+            completedClass: '',
+            showRemoveModal: false
         }
 
         this.removeTask = this.removeTask.bind(this);
@@ -40,6 +51,7 @@ export class Task extends Component {
         this.validateTime = this.validateTime.bind(this);
         this.assignColor = this.assignColor.bind(this);
         this.handleWrongTime = this.handleWrongTime.bind(this);
+        this.confirmRemoveTask = this.confirmRemoveTask.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
@@ -56,10 +68,12 @@ export class Task extends Component {
     //Use callback function to update parent component and delete the task
     removeTask(){
         this.props.remove(this.props.index, this.props.id)
+        this.setState({showRemoveModal: false})
     }
 
 
     onCheck(e){
+
         //change state to reflect the checked box or unchecked
         this.state.checked = e.target.checked;
         this.setState({checked: e.target.checked})
@@ -71,9 +85,16 @@ export class Task extends Component {
         if(this.props.inToday)
         {
             if(e.target.checked)
+            {
                 this.setState({completedClass: 'completedTask'})
+                this.props.todayCheckedUpdate(true, this.props.id)
+            }
             else
+            {
                 this.setState({completedClass: ' '})
+                this.props.todayCheckedUpdate(false, this.props.id)
+
+            }
 
             this.updateAPI({completed: e.target.checked})
                 .then(() => console.log("Task completed status changed"))
@@ -98,6 +119,7 @@ export class Task extends Component {
     }
 
     onTimeChange(event){
+        console.log(this)
         var validTime = this.validateTime(event)
         console.log("Called onTimeChange...")
 
@@ -113,8 +135,15 @@ export class Task extends Component {
         }
         else
         {
-            //TODO: handle incorrect entry 
-            console.log("Incorrect time entered or no change detected")
+            if(event == this.props.time)//Dont do anything if no change detected
+            {
+                console.log("No Change detected");    
+                return;
+            }
+
+            alert("The time entered for a task must be an integer and between 1 and 10. Please try again.");
+            location.reload();
+            console.log("Incorrect time entered")
         }
             
 
@@ -149,70 +178,26 @@ export class Task extends Component {
     
         const PUT_API = `/api/tasks/${id}/`
 
-        const request_json =  {
-            method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(update_json) // body data type must match "Content-Type" header
-        }
+        // const request_json =  {
+        //     method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(update_json) // body data type must match "Content-Type" header
+        // }
 
-        await fetch(PUT_API, request_json)// Send post requests to REST API to create a new entry into DB
+        await sendHttpAsync(PUT_API, 'PATCH', update_json)// Send post requests to REST API to create a new entry into DB
             .then(response => console.log("Task updated"))
             .catch(error => console.error("Error occured trying to PUT for task", error))
 
     }
 
-    // /**
-    //  * Validates client format of time input.
-    //  * @param {string} time - string that represents time (HH:MM:SS or MM:SS or MM) 
-    //  */
-    // validateTime(time){
-    //     var time_string = time.split(':')
-    
-    //     //Check each entry in time_string array for a non number
-    //     for(time in time_string)
-    //     {
-    //         var target = time_string[time];
-    //         if(isNaN(Number(target)))
-    //         {
-    //             console.error("Time is not a number")
-    //             return false
-
-    //         }
-            
-    //     }
-        
-
-    //     if(time_string.length > 2)
-    //     {
-    //         console.error("Time has too many entries. Max should be HH:MM")
-    //         return false;
-    //     }
-    //     else{
-    //         //MM
-    //         if((time_string == 1) &&  time_string[0] > 12)
-    //         {
-    //             console.error("Too many hours in Time")
-    //             return false;
-    //         }
-    //         //HH:MM
-    //         if(time_string == 2 && (time_string[0] > 12 || time_string[1] >= 60))
-    //         {
-    //             console.error("Time error. Either Minutes or hours too high or low")
-    //             return false;
-    //         }
-                
-    //     }
-
-    //     return true
-    // }
+   
 
     /**
     *  helper function that change time label so user is aware of incorrect time input
     * @param {string} time - incorrect time input from user 
     */
-   
    handleWrongTime(time){
 
     this.setState(
@@ -295,6 +280,14 @@ export class Task extends Component {
             
     }
 
+    confirmRemoveTask(){
+        //show modal
+        this.setState({
+            showRemoveModal: true
+        });
+        
+    }
+
 
 
     render(){
@@ -304,9 +297,26 @@ export class Task extends Component {
 
         <div className={`task ${this.state.mainClass} ${this.state.completedClass}`}>
 
+            {/* modal only shown when delete pressed */}
+
+            {this.state.showRemoveModal &&
+            <div>
+                <div className='dropdown-backdrop'/>
+                <div className='remove-task-modal'>
+                    <h3>Remove Task?</h3>
+
+                    <div className='task-modal-btnholder'>
+                        <button id='removeTask_yes' onClick={this.removeTask}>Yes</button>
+                        <button id='removeTask_no' onClick={() => this.setState({showRemoveModal: false})} >No</button>
+                    </div>
+                </div>
+            </div>
+            }
+
             <div className="checkbox-n-button">
-                <input id="cbox"type="checkbox" onChange={this.onCheck}/>
-                <button className="deleteTask-btn" onClick={(this.removeTask)}> {trash}</button>
+                <input  checked={this.state.checked} id="cbox" type="checkbox" onChange={this.onCheck}/>
+                {/* <button className="deleteTask-btn" onClick={(this.removeTask)}> {trash}</button> */}
+                <button className="deleteTask-btn" onClick={(this.confirmRemoveTask)}> {trash}</button>
             </div>
 
             <div id="taskName"> 
@@ -375,3 +385,56 @@ export class Task extends Component {
 }
 
 export default Task
+
+
+
+
+
+
+
+
+
+ // /**
+    //  * Validates client format of time input.
+    //  * @param {string} time - string that represents time (HH:MM:SS or MM:SS or MM) 
+    //  */
+    // validateTime(time){
+    //     var time_string = time.split(':')
+    
+    //     //Check each entry in time_string array for a non number
+    //     for(time in time_string)
+    //     {
+    //         var target = time_string[time];
+    //         if(isNaN(Number(target)))
+    //         {
+    //             console.error("Time is not a number")
+    //             return false
+
+    //         }
+            
+    //     }
+        
+
+    //     if(time_string.length > 2)
+    //     {
+    //         console.error("Time has too many entries. Max should be HH:MM")
+    //         return false;
+    //     }
+    //     else{
+    //         //MM
+    //         if((time_string == 1) &&  time_string[0] > 12)
+    //         {
+    //             console.error("Too many hours in Time")
+    //             return false;
+    //         }
+    //         //HH:MM
+    //         if(time_string == 2 && (time_string[0] > 12 || time_string[1] >= 60))
+    //         {
+    //             console.error("Time error. Either Minutes or hours too high or low")
+    //             return false;
+    //         }
+                
+    //     }
+
+    //     return true
+    // }
