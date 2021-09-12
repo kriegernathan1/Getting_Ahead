@@ -158,20 +158,23 @@ export class ProductiveModal extends Component{
 
                         <div> 
                             <div className={`task-holder`}>
+                            
+                                <div className='checkbox-and-task'>
 
-                                <input type='checkbox' onChange={e => {
-                                    
-                                    if(this.state.currentTaskIndex < this.props.tasks.length)
-                                    {
-                                        this.updateTasks();
-                                        e.target.checked = false;
-                                    }
-                                    
+                                    <input type='checkbox' onChange={e => {
+                                        
+                                        if(this.state.currentTaskIndex < this.props.tasks.length)
+                                        {
+                                            this.updateTasks();
+                                            e.target.checked = false;
+                                        }
+                                        
 
-                                }}/>
-                                
-                                <div>
-                                    <p><span id="task-name">{this.state.task}</span></p>
+                                    }}/>
+                                    
+                                    <div>
+                                        <p><span id="task-name">{this.state.task}</span></p>
+                                    </div>
                                 </div>
                                 
                                 <p> Time Remaining: <span>{this.state.taskTime} Pomodoro(s)</span></p>

@@ -135,51 +135,68 @@ export class Timer extends Component{
 
         return(
             <div className="timer">
-                <div className="time"> 
-                    <p className="countdown">{this.state.pomodoroTimeFormat}</p>
-                </div>
+                
                 
                 
                 <div className="timer-btns">
-                    <button className='start-timer timer-btn' onClick={() => 
-                    {
-                        if(!this.started) //only call function if not started yet
-                            this.pomodoro('regular', true);
-                        
-                        else{
-                            this.pauseCountDown = false;
-                        }
-                        
+                    <div className='breaks-btns'>
+                            <button className="timer-btn break" onClick={() => 
+                                {
+                                    this.pauseCountDown = false;
+                                    clearInterval(this.intervalId); 
+                                    this.pomodoro('break', true)
+                                    
+                                }}>Short Break</button>
+                            <button className="timer-btn long-break" onClick={() => 
+                                {
+                                    this.pauseCountDown = false;
+                                    clearInterval(this.intervalId); 
+                                    this.pomodoro('long break', true)
+                                }}>Long Break
+                            </button>
+                    </div>
 
-                        
-                    }}>Start</button>
+                    <div className="time"> 
+                        <p className="countdown">{this.state.pomodoroTimeFormat}</p>
+                    </div>
 
-                    <button className="timer-btn break" onClick={() => 
+                    <div className='timer-function'>
+                        <button className='start-timer timer-btn' onClick={() => 
                         {
-                            this.pauseCountDown = false;
-                            clearInterval(this.intervalId); 
-                            this.pomodoro('break', true)
+                            if(!this.started) //only call function if not started yet
+                                this.pomodoro('regular', true);
                             
-                        }}>Short Break</button>
-                    <button className="timer-btn long-break" onClick={() => 
-                        {
-                            this.pauseCountDown = false;
-                            clearInterval(this.intervalId); 
-                            this.pomodoro('long break', true)
-                        }}>Long Break</button>
-                    <button className='stop-timer timer-btn' onClick={() => 
-                        {
-                            this.pauseCountDown = true;
+                            else{
+                                this.pauseCountDown = false;
+                            }
+                            
+
+                            
+                        }}>Start</button>
+
+                        <button className='stop-timer timer-btn' onClick={() => 
+                            {
+                                this.pauseCountDown = true;
 
 
-                        }}>Stop</button>
-                     <button className='reset-timer timer-btn' onClick={() => 
-                        {
-                            clearInterval(this.intervalId);
-                            this.pauseCountDown = true;
-                            this.setState({pomodoroTimeFormat: '25:00'})
-                            this.pomodoro('regular', true)
-                        }}>Reset</button>
+                            }}>Stop
+                        </button>
+
+                        <button className='reset-timer timer-btn' onClick={() => 
+                            {
+                                clearInterval(this.intervalId);
+                                this.pauseCountDown = true;
+                                this.setState({pomodoroTimeFormat: '25:00'})
+                                this.pomodoro('regular', true)
+                            }}>Reset
+                        </button>
+
+                    </div>
+
+ 
+
+                    
+                   
                     
 
                 </div>

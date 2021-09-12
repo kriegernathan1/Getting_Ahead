@@ -33,16 +33,23 @@ h2{
     flex-direction: column;
 }
 
+p{
+    max-width: 300px;
+}
+
 
 button{
-    width: 100%;
+    width: 30vw;
     padding: 0.5em 5em;
     border-radius: 100px;
     background-color: transparent;
     border:2px solid #28FC05;
     color:black;
     font-weight: 600;
-    color: #28FC05
+    color: #28FC05;
+    max-width: 300px;
+    min-width: 200px;
+    white-space: nowrap;
 }
 
 .login{
@@ -58,8 +65,9 @@ label{
 input{
     height: 30px;
     text-indent: 0.5em;
-    width: 30vw;
+    width: 100%;
     max-width: 300px;
+    min-width: 200px;
 }
 
 input:focus{
@@ -77,6 +85,7 @@ input::placeholder{
     display: flex; 
     justify-content: center;
     align-items: center;
+    
 }
 
 

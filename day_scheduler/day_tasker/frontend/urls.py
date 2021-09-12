@@ -8,7 +8,5 @@ urlpatterns = [
     re_path('MyTasks', views.index),
     re_path('username', views.username),
     re_path('register', views.registerForm),
-    re_path('Guide', TemplateView.as_view(template_name='guide.html')),
-
     re_path('', views.home)
 ]

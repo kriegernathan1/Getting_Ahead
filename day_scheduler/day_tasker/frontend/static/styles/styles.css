@@ -82,9 +82,11 @@ input{
 }
 
 #deleteTask{
+    position: relative;
     width: 1.3em;
-    margin-right: 28px;
+    /* margin-right: 13px; */
     margin-top: 10px;
+    left: -12px;
 }
 
 
@@ -165,6 +167,8 @@ input{
       width: 100%;
       background-color: transparent;
   }
+
+
 
   
 
@@ -425,11 +429,7 @@ input{
     margin-right: 10%;
 }
 
-.timer-btns > *{
-    padding: 1em;
-}
-
-.start-timer{
+/* .start-timer{
     background-color: green;
     color: white;
     
@@ -440,9 +440,9 @@ input{
 .stop-timer{
     background-color: red;
     color: white;
-}
+} */
 
-.productive-modal button{
+.timer-function button{
     border: 0.5px solid black;
     width: 120px;
     box-shadow: rgba(0, 0, 0, 0.15) 3px 3px 2.6px;
@@ -450,18 +450,70 @@ input{
     border-radius: 1em;
     margin-right: 0.5em;
     margin-top: 0.5em;
+    background-color: transparent;
 }
 
-.productive-modal button:hover{
-    border: 1px solid black;
+.breaks-btns button:hover{
+    
 }
 
-.break{
+button{
     white-space: nowrap;
-    background-color: blue;
-    color: white;
 }
 
+.breaks-btns{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin:0;
+    margin-bottom: 1em;
+}
+
+.breaks-btns button{
+    font-size: 1.2em;
+    background-color: transparent;
+    border: none;
+    color: black;
+    width: 50%;
+    border-bottom:1px solid #1e2f45;
+
+
+}
+
+.breaks-btns button:hover{
+    border-bottom:2px solid #1e2f45;
+    font-weight: bold;
+}
+
+.timer-function{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.timer-function button{
+    font-size: 1.2em;
+}
+
+.start-timer{
+    border: 2px solid #28FC05 !important;
+    color: #109e50;
+}
+
+.stop-timer{
+    border: 2px solid #cc0000 !important;
+    color: #cc0000;
+}
+
+
+/* .break{
+    white-space: nowrap;
+    border: none;
+} */
+/* 
 .long-break{
     color: white;
     background-color: orange;
@@ -471,7 +523,7 @@ input{
     font-size: 1.2em;
     padding: 0 15px;
     border: none;
-}
+} */
 
 .countdown{
     font-size: 2em;
@@ -539,11 +591,14 @@ br{
 
 .task-holder{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     width: 90%;
     padding: 1em;
+    gap: 25px;
 }
+
+
 
 .task-holder input{
     zoom: 1.2;
@@ -760,6 +815,45 @@ br{
     top: 30%;
 }
 
+
+
+nav li, .dropdown{
+    text-align: center;
+}
+
+
+.logo{
+    position: absolute;
+    width: 210px;
+    height: auto;
+    filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(245deg) brightness(111%) contrast(101%);
+    top: 35px;
+    /* z-index: -1; */
+
+}
+
+nav a{
+    font-size: 1.1em;
+}
+
+.checkbox-and-task input[type='checkbox']{
+    position: relative;
+    top: 4px;
+    margin-right: 0.3em;
+}
+
+@media (max-width: 550px){
+    .topBtns{
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .topBtns button{
+        width: 250px;
+    }
+
+}
+
 @media (min-width: 992px){
     .navbar-collapse{
         position: relative;
@@ -769,26 +863,16 @@ br{
         position: absolute;
         right: 0;
     }
+    .navbar-nav{
+        margin-left: 205px;
+    }
     
 
 }
 
-
-.logo{
-    position: absolute;
-    width: 350px;
-    height: auto;
-    filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(245deg) brightness(111%) contrast(101%);
-    top: -50px;
-
-}
-
-.navbar-nav{
-    margin-left: 205px;
-}
-
-.navbar
-
-nav a{
-    font-size: 1.1em;
+@media (max-width: 750px){
+    .task-holder{
+        flex-direction: column;
+        gap: 4px;
+    }
 }

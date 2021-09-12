@@ -75,7 +75,6 @@ export class Nav extends Component {
               
 
                 <NavDropdown title={`Hello, ${this.state.username}`} id="collasible-nav-dropdown" className='dropdown-custom'>
-                  <NavDropdown.Item href="/Guide" target='_blank'>Guide</NavDropdown.Item>
                   <NavDropdown.Item href="/accounts/logout/">Logout</NavDropdown.Item>
                 </NavDropdown>
               </ul>

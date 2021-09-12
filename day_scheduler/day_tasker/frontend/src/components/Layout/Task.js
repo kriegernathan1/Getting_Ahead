@@ -105,8 +105,9 @@ export class Task extends Component {
             
 
     onNameChange(event){
+        console.log(event);
         
-        if(event != this.props.name)
+        if(event != this.props.name && event.trim() != '')
         {
             var update_json = {
                 name: event
@@ -315,7 +316,6 @@ export class Task extends Component {
 
             <div className="checkbox-n-button">
                 <input  checked={this.state.checked} id="cbox" type="checkbox" onChange={this.onCheck}/>
-                {/* <button className="deleteTask-btn" onClick={(this.removeTask)}> {trash}</button> */}
                 <button className="deleteTask-btn" onClick={(this.confirmRemoveTask)}> {trash}</button>
             </div>
 
