@@ -45,9 +45,6 @@ export class Today extends Component {
         this.getUncheckedTasks();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot){
-        console.log("updated Today")
-    }
 
     getTasks(){
         fetch(TASK_API)
@@ -149,12 +146,9 @@ export class Today extends Component {
             const id = this.state.tasks[task].props.id
             const PATCH_API = `/api/tasks/${id}/`
 
-            console.log(this.state.tasks[task])
-
             const request_json = {}
 
             if(id in this.checkedTasks){
-                console.log("task being deleted: ", this.state.tasks[task].name)
                 //delete task
                 request_json =  {
                     method: 'DELETE', // *GET, POST, PUT, DELETE, PATCH, etc.
@@ -246,14 +240,11 @@ export class Today extends Component {
             this.checkedTasks[id] = id;
         else if(!checkOrUncheck && (id in this.checkedTasks))
             delete this.checkedTasks[id]
-
-        console.log("Today checked tasks are: ", this.checkedTasks)
     }
 
     getUncheckedTasks(){
         var tasksCopy = [...this.state.tasks];
         var uncheckedTask = []
-        console.log(this.checkedTasks)
 
         for(const task in tasksCopy){
             //check if task id is in checkedarr
@@ -263,7 +254,6 @@ export class Today extends Component {
                 uncheckedTask.push(tasksCopy[task])
         }
 
-        console.log(tasksCopy)
         return uncheckedTask;
     }
 

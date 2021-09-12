@@ -57,13 +57,14 @@ input{
     margin-right: 1vw;
 }
 
-#taskName{
+.taskname{
     margin-top: 10px; 
     max-width: 33%;
     width: 33%;
+    margin-right: auto;
 }
 
-#taskName label{
+.taskname label{
     word-wrap: break-word;
     max-width: 100%;
 }

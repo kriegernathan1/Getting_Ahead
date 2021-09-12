@@ -39,7 +39,8 @@ export class Task extends Component {
             style: {},
             mainClass: 'default',
             completedClass: '',
-            showRemoveModal: false
+            showRemoveModal: false,
+            name: this.props.name
         }
 
         this.removeTask = this.removeTask.bind(this);
@@ -52,11 +53,6 @@ export class Task extends Component {
         this.assignColor = this.assignColor.bind(this);
         this.handleWrongTime = this.handleWrongTime.bind(this);
         this.confirmRemoveTask = this.confirmRemoveTask.bind(this);
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot){
-        console.log("updated Task")
-
     }
     
     componentDidMount(){
@@ -105,7 +101,6 @@ export class Task extends Component {
             
 
     onNameChange(event){
-        console.log(event);
         
         if(event != this.props.name && event.trim() != '')
         {
@@ -115,14 +110,17 @@ export class Task extends Component {
             
             this.updateAPI(update_json)
         }
-        else
+        else if(event == this.props.name)
             return;
+        else{
+            alert('No empty task names. Please try again. ');
+            location.reload();
+            return;
+        }
     }
 
     onTimeChange(event){
-        console.log(this)
         var validTime = this.validateTime(event)
-        console.log("Called onTimeChange...")
 
         if(event != this.props.time && validTime)
         {
@@ -274,7 +272,6 @@ export class Task extends Component {
             case "Not Important Not Urgent":
             {
                 this.setState({mainClass: 'notImportantNotUrgent'});
-                console.log('change')
                 break;
             }
         }
@@ -319,10 +316,10 @@ export class Task extends Component {
                 <button className="deleteTask-btn" onClick={(this.confirmRemoveTask)}> {trash}</button>
             </div>
 
-            <div id="taskName"> 
+            <div className="taskName" id={this.props.id}> 
                 <EditableLabel 
                     inputId={this.state.color}
-                    text={this.props.name}
+                    text={this.state.name}
                     labelFontSize='1em'
                     labelFontWeight='600'
                     onFocusOut={this.onNameChange}

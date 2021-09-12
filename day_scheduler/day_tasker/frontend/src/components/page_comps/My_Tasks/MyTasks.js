@@ -195,9 +195,6 @@ export class My_tasks extends Component {
             this.checkedTasks[id] = id;
         else if(!checkOrUncheck && (id in this.checkedTasks))
             delete this.checkedTasks[id]
-
-    
-        console.log("The checked task id's are: ", this.checkedTasks)
         
     }
 
@@ -267,94 +264,3 @@ export class My_tasks extends Component {
 }
 
 export default My_tasks;
-
-
-// ----------------- May delete -> using API instead --------------
-
-    // //set the showInTasks prop to false of all of the tasks that are checked upon button being clicked 
-    // moveToToday(){
-    //     if(this.checkedTasks.length == 0)
-    //         return;
-
-    //     //remove all tasks that are currently checked from local state array so they can be moved to "Today" page
-    //     //need loop to only consider values in checked array that are not null 
-    //     for(var i = 0; i < this.checkedTasks.length; i++)
-    //     {
-    //         if(this.checkedTasks[i] == null)
-    //             continue;
-    //         else
-    //         {
-    //             //delete all tasks from local array that are being moved to Today page
-    //             delete this.state.tasks[this.checkedTasks[i].index];
-
-    //             //update the master list so the props.showInTasks is false
-    //             this.props.setShowInTasks(this.checkedTasks[i].masterIndex);
-    //         }
-            
-    //     }
-
-    //     //rerender
-    //     this.setState({})//rerender 
-
-            
-        
-    // }
-
-    // //when a task is checked this callback func will be used 
-    // //arr that tracks what tasks are selected currently will be updated with JSON object 
-    // //containing both index and masterindex
-    // //params: 
-    //     //index: local index of task for myTasks state array
-    //     //master: index within the master list of tasks
-    // updateCheckedArr(isChecked, index_passed, masterIndex_passed){
-    //     //create JSON object to update check list with
-    //     var task_props = {
-    //         index: index_passed,
-    //         masterIndex: masterIndex_passed 
-    //     }
-
-    //     //add to array 
-    //     if(isChecked)
-    //     {
-    //         this.checkedTasks.push(task_props)
-    //     }
-    //     //remove from array
-    //     else
-    //     {
-    //         //find which task in checked array has the same index as the one passed 
-    //         for(var i = 0; i < this.checkedTasks.length; i++)
-    //         {
-    //             if(this.checkedTasks[i] == null)
-    //                 continue;
-    //             if(this.checkedTasks[i].index == index_passed)
-    //                 delete this.checkedTasks[i];
-    //         }
-
-    //         delete this.checkedTasks[index_passed];
-    //     }
-
-    //     console.log(this.checkedTasks)
-        
-    // }
-
-
-
-
-
-    // //only called in constructor. After, as updates are made the array to show will be edited
-    // //to avoid looping every time there is a change
-    // createTasksArray(){
-    //     var masterTasks = this.props.masterTasks //assigning master tasks for naming 
-    //     var newTaskArr = [] //array that will be returned 
-
-    //     //loop through and create another array that will be the shown array
-    //     for(var i = 0; i < masterTasks.length; i++)
-    //     {
-    //         if(masterTasks[i].props.showInMyTasks == true)
-    //             newTaskArr.push(masterTasks[i]);
-    //     }
-
-    //     return newTaskArr;
-    // }
-    
-    // ----------------- May delete -> using API instead --------------
