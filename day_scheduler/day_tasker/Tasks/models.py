@@ -36,7 +36,7 @@ class Task(models.Model):
     time = models.CharField(max_length=8, default="")
     importance = models.CharField(max_length=50, choices = IMPORTANCE_CHOICES)
     lifeArea = models.CharField(max_length=20, choices=LIFE_AREA_CHOICES)
-    key = models.IntegerField()
+    key = models.BigIntegerField()
     showInToday = models.BooleanField()
     completed = models.BooleanField(default=False)
     created_at = models.DateField(auto_now=True) 
