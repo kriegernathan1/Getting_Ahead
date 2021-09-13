@@ -54,13 +54,13 @@ class App extends Component {
                <div className="App">
                 <Nav link1={this.state.link1}/>
                 <Switch>
-                    <Route path="/Today" 
+                    <Route path="/app/Today" 
                         render={ () => 
                         (
                             <Today activeNav={this.activeNav}  />
                         )} 
                     />
-                    <Route path="/MyTasks" 
+                    <Route path="/app/MyTasks" 
                         render={ () => 
                         (
                             <MyTasks activeNav={this.activeNav} />

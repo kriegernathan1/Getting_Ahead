@@ -17,15 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 
-admin.autodiscover()
 
 #Allow both apps frontend and leads to handle url requests
 urlpatterns = [
     path('admin/', admin.site.urls),
      path('api', include('Tasks.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', include('frontend.urls')),
+    path('app', include('frontend.urls')),
+    path('', RedirectView.as_view(url='/app/')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

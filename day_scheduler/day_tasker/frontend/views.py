@@ -5,9 +5,6 @@ from .forms import UserRegistrationForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 
-
-# Create your views here.
-
 #React handles frontend by targeting index.html
 def index(request):
     if request.user.is_authenticated:
@@ -20,7 +17,7 @@ def home(request):
     if not request.user.is_authenticated:
         return render(request, 'home.html')
     else:
-        return redirect('/Today')
+        return redirect('/app/Today')
 
 #return the username of currently loged in user
 @api_view(('GET',))
@@ -36,7 +33,7 @@ def registerForm(request):
 
     #if a user is logged in do not let them register
     if request.user.is_authenticated:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/app/')
 
 
     #if POST update database and redirect
