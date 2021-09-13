@@ -87,7 +87,7 @@ export class My_tasks extends Component {
     //Creates a new task for page and updates parent component so it can store all tasks on site 
     //also updates current page tasks
     addEvent(){
-        const new_key = new Date().getTime();
+        const new_key = Math.floor(1000 + Math.random() * 9000);
         const post_api = "/api/tasks/";
 
         const task_json = {
