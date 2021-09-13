@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    <title>Login</title>
+
+    <script defer>
+        window.onload = () => {
+            var username = document.getElementById('id_username')
+            var password = document.getElementById('id_password')
+
+            username.placeholder = 'Username'
+            password.placeholder = 'Password'
+        }
+       
+    </script>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login">
+            <h2>Please Log In Below</h2>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Log In</button>
+            </form>
+
+        </div>
+        
+
+    </div>
+    
+    
+</body>
+</html>
+
+
