@@ -311,29 +311,33 @@ export class Task extends Component {
             </div>
             }
 
-            <div className="checkbox-n-button">
-                <input  checked={this.state.checked} id="cbox" type="checkbox" onChange={this.onCheck}/>
-                <button className="deleteTask-btn" onClick={(this.confirmRemoveTask)}> {trash}</button>
-            </div>
+            <div className='mobile-wrapper'>
+                <div className="checkbox-n-button">
+                    <input  checked={this.state.checked} id="cbox" type="checkbox" onChange={this.onCheck}/>
+                    <button className="deleteTask-btn" onClick={(this.confirmRemoveTask)}> {trash}</button>
+                </div>
 
-            <div className="taskName" id={this.props.id}> 
-                <EditableLabel 
-                    inputId={this.state.color}
-                    text={this.state.name}
-                    labelFontSize='1em'
-                    labelFontWeight='600'
-                    onFocusOut={this.onNameChange}
-                />
-            </div>
-            
+                <div className="taskName" id={this.props.id}> 
+                    <EditableLabel 
+                        inputId={this.state.color}
+                        text={this.state.name}
+                        labelFontSize='1em'
+                        labelFontWeight='600'
+                        onFocusOut={this.onNameChange}
+                    />
+                </div>
+                
 
-            
-            <div id="time">
-                <EditableLabel inputId={this.state.colorClass} text={this.state.time} 
-                    labelFontSize='1.1em' labelFontWeight='600' onFocusOut={this.onTimeChange}
-                /> 
-                Pomodoro(s)
-            </div> 
+                
+                <div id="time">
+                    <EditableLabel inputId={this.state.colorClass} text={this.state.time} 
+                        labelFontSize='1.1em' labelFontWeight='600' onFocusOut={this.onTimeChange}
+                    /> 
+                    Pomodoro(s)
+                </div> 
+
+            </div>
+               
         
             <div className="importance">
                 <div className="importance-inner">
