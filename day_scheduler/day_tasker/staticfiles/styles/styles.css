@@ -717,6 +717,7 @@ br{
     background-color: white;
     padding: 2em;
     border-radius: 1em;
+    min-width: 300px;
 }
 
 .finish-day-modal p{
@@ -745,7 +746,7 @@ br{
     border: none;
     color: white;
     width: 30%;
-    min-width: 150px;
+    min-width: 130px;
     border: 1px solid #ddd;
     white-space: nowrap;
 }
@@ -777,6 +778,7 @@ br{
     padding: 1em;
     padding-bottom: 2em;
     border-radius: 1em;
+    min-width: 300px;
 }
 
 .remove-task-modal h3{
@@ -853,11 +855,35 @@ nav a{
     position: relative;
 }
 
+
+
+
+
 @media (max-width: 550px){
     .topBtns{
         flex-direction: column;
         /* gap: 15px; */
     }
+
+    .productive-modal{
+        width: 95vw;
+    }
+
+    .task-modal-btnholder{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .task-modal-btnholder button:first-of-type{
+        margin-bottom: 5px;
+    }
+
+    .task-modal-btnholder button:last-of-type{
+        margin-top: 5px;
+    }
+
+
 
     .topBtns > *{
         margin-bottom: 1.5em;

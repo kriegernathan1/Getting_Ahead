@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import Timer from './Timer'
 import Task from "../../Layout/Task"
 import { isGeneratorFunction } from 'regenerator-runtime';
+import sendHttpAsync from '../../../cookie';
+
 
 
 export class ProductiveModal extends Component{
@@ -64,15 +66,8 @@ export class ProductiveModal extends Component{
         const id = this.state.id;
         const PATCH_API = `/api/tasks/${id}/`
 
-        const request_json =  {
-            method: 'PATCH', // *GET, POST, PUT, DELETE, PATCH, etc.
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({completed: true}) 
-        }
 
-        await fetch(PATCH_API, request_json)// Send post requests to REST API to create a new entry into DB
+        await sendHttpAsync(PATCH_API, 'PATCH', {completed: true})// Send post requests to REST API to create a new entry into DB
                 .then(response => console.log(response))
                 .catch(error => console.error("Error marking task complete in productivity modal", error))
 

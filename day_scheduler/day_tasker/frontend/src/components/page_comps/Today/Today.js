@@ -192,7 +192,7 @@ export class Today extends Component {
     
         }
 
-        window.location.href = "/MyTasks"
+        window.location.href = "/app/MyTasks"
     }
 
     /**
