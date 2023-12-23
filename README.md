@@ -1,4 +1,4 @@
-# Getting_Ahead
+# Getting Ahead
 * Productivity web app that adapts Stephen Covey's task methodology.
 * Created using React, React-Router, Django Rest Framework, PostgreSQL, Babel, Webpack, React-Bootstrap
 
